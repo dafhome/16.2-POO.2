@@ -94,8 +94,9 @@ public class Bicicletas {
 
     @Override
     public String toString() {
-        return "Bicicletas marca:" + marca + ", color:" + color + ", marchas:" + marchas + ", year:" + year
-                + ", maxVel:" + maxVel + ", electrica:" + electrica + ", claxon:" + claxon + ", precio:" + precio + ".";
+        return "Marca:" + marca + ", Color:" + color + ", Marchas:" + marchas + ", Año:" + year
+                + ", Velocidad Maxima:" + maxVel + ", Electrica:" + electrica + ", Claxon:" + claxon + ", Precio:"
+                + precio + ".";
     }
 
     private boolean validarTrue(String pregunta) {
@@ -130,58 +131,100 @@ public class Bicicletas {
     }
 
     public void mostrarTodasMarcas() {
+        if (tienda.size() > 0) {
+            for (Bicicletas bicicletas : tienda) {
+                System.out.print(bicicletas.getMarca());
+                System.out.print(" ");
+            }
+        } else
+            System.out.println("Todavía no hay bicicletas, prueba a crear una.");
 
-        for (Bicicletas bicicletas : tienda) {
-            System.out.print(bicicletas.getMarca());
-            System.out.print(" ");
-        }
     }
 
     public void bicicletaMasCara() {
-        double mayorPrecio = 0;
-        int index = 0;
-        for (int i = 0; i < tienda.size(); i++) {
-            if (tienda.get(i).precio > mayorPrecio) {
-                mayorPrecio = tienda.get(i).precio;
-                index = i;
+
+        if (tienda.size() > 0) {
+            double mayorPrecio = 0;
+            int index = 0;
+            for (int i = 0; i < tienda.size(); i++) {
+                if (tienda.get(i).precio > mayorPrecio) {
+                    mayorPrecio = tienda.get(i).precio;
+                    index = i;
+                }
             }
-        }
-        System.out.println(tienda.get(index));
+            System.out.println(tienda.get(index));
+        } else
+            System.out.println("Todavía no hay bicicletas, prueba a crear una.");
+
     }
 
-    public void eliminarBicicleta(Scanner scan){
+    public void eliminarBicicleta(Scanner scan) {
         System.out.println("Que marca de bicicleta quieres borrar?");
         String marcaBorrar = scan.nextLine();
         int index = 0;
         int contador = 0;
-        for ( int i = 0; i<tienda.size(); i++){
+        for (int i = 0; i < tienda.size(); i++) {
             if (tienda.get(i).marca.equalsIgnoreCase(marcaBorrar)) {
                 contador++;
                 index = i;
             }
         }
 
-        if (contador==1) {
+        if (contador == 1 && tienda.size() == 1) {
+            tienda.clear();
+            System.out.println("Se ha eliminado la bicicleta correctamente.");
+        } else if (contador == 1) {
             tienda.remove(index);
-        }else{
+        } else {
             System.out.println("Hay más de una bicicleta de este marca, que color quieres borrar?");
             index = 0;
             contador = 0;
             String colorBorrar = scan.nextLine();
-            for ( int i = 0; i<tienda.size(); i++){
-                if (tienda.get(i).color.equalsIgnoreCase(colorBorrar)&&tienda.get(i).marca.equalsIgnoreCase(marcaBorrar)) {
+            for (int i = 0; i < tienda.size(); i++) {
+                if (tienda.get(i).color.equalsIgnoreCase(colorBorrar)
+                        && tienda.get(i).marca.equalsIgnoreCase(marcaBorrar)) {
                     contador++;
                     index = i;
                 }
             }
-    
+            if (contador == 1) {
+                tienda.remove(index);
+                System.out.println("Se ha eliminado la bicicleta correctamente.");
+            } else
+                System.out.println("No podemos concretar la bicicleta a borrar.");
         }
-        if (contador==1) {
-            tienda.remove(index);
-        }else
-        System.out.println("No podemos concretar la bicicleta a borrar.");
+
     }
 
+    
+
+    public void tocarClaxon() {
+        if (tienda.size() > 0) {
+            int contador = 0;
+            for (int i = 0; i < tienda.size(); i++) {
+
+                if (tienda.get(i).claxon) {
+                    System.out.println("Tienes alguna bicicleta con claxon! Vamos a hacerlo sonar.");
+                    i = tienda.size();
+                } else
+                    contador++;
+            }
+            if (contador == tienda.size()) {
+                System.out.println("Lo siento pero ninguna bicicleta tiene claxon.");
+            }
+        } else
+            System.out.println("Todavía no hay bicicletas, prueba a crear una.");
+
+    }
+
+    public void mostrarTodas() {
+        if (tienda.size() > 0) {
+            for (Bicicletas bicicletas : tienda) {
+                System.out.println(bicicletas);
+            }
+        } else
+            System.out.println("Todavía no hay bicicletas, prueba a crear una.");
+    }
 }
 
 // # 16.2-POO.2

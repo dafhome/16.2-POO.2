@@ -25,6 +25,9 @@ public class App {
             System.out.println("2.-Ver Bicicleta más cara");
             System.out.println("3.-Eliminar Bicicleta");
             System.out.println("4.-Mostrar Marca de todas las Bicicletas");
+            System.out.println("5.-Mostrar todas las Bicicletas");
+
+            System.out.println("6.-Tocar el claxon.");
 
             System.out.println("0.-Salir");
             System.out.println("----------------------------------------------------------------------------");
@@ -40,7 +43,9 @@ public class App {
 
                     break;
                 case 2:
-
+                    bicicleta.bicicletaMasCara();
+                    System.out.println();
+                    System.out.println("----------------------------------------------------------------------------");
                     break;
                 case 3:
                     bicicleta.eliminarBicicleta(scan);
@@ -50,6 +55,16 @@ public class App {
 
                 case 4:
                     bicicleta.mostrarTodasMarcas();
+                    System.out.println();
+                    System.out.println("----------------------------------------------------------------------------");
+                    break;
+                case 5:
+                    bicicleta.mostrarTodas();
+                    System.out.println();
+                    System.out.println("----------------------------------------------------------------------------");
+                    break;
+                case 6:
+                    bicicleta.tocarClaxon();
                     System.out.println();
                     System.out.println("----------------------------------------------------------------------------");
                     break;
@@ -75,4 +90,3 @@ public class App {
 // Instructions
 
 // - Puedes añadir métodos: tocar el claxon, pedalear, parar, girar, cambiar
-
